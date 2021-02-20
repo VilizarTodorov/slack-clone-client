@@ -1,6 +1,6 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { gql, useQuery } from "@apollo/client";
+import Routes from "./Components/Routes";
+import { Fragment } from "react";
 
 function App() {
   const { loading, error, data } = useQuery(allUsersQuery);
@@ -10,11 +10,18 @@ function App() {
     console.log(error);
     return <p>Error</p>;
   }
-  return data.allUsers.map(({ id }) => (
-    <div key={id}>
-      <p>{id}</p>
-    </div>
-  ));
+  return (
+    <Fragment>
+      {data.allUsers.map(({ id, email, username }) => (
+        <div key={id}>
+          <p>
+            {id} : {email} : {username}
+          </p>
+        </div>
+      ))}
+      <Routes></Routes>
+    </Fragment>
+  );
 }
 
 export default App;
@@ -23,6 +30,8 @@ const allUsersQuery = gql`
   {
     allUsers {
       id
+      email
+      username
     }
   }
 `;
