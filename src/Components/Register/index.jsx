@@ -2,8 +2,15 @@ import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Container, Form, Header, Button, Message } from "semantic-ui-react";
-import { EMAIL_STR, PASSWORD_STR, REGISTER_STR, REPEAT_PASSWORD_STR, USERNAME_STR } from "../../constants/strings";
-import registerMutation from "../../Mutations/registerMutation";
+import {
+  EMAIL_STR,
+  FORM_ERROR_MESSAGE_HEADER_STR,
+  PASSWORD_STR,
+  REGISTER_STR,
+  REPEAT_PASSWORD_STR,
+  USERNAME_STR,
+} from "../../constants/strings";
+import { registerMutation } from "../../Mutations";
 import { HOME } from "../../constants/routes";
 
 const INITIAL_ERROR_STATE = {
@@ -113,9 +120,7 @@ const Register = () => {
 
         <Button fluid>Submit</Button>
       </Form>
-      {errorMessages.length > 0 ? (
-        <Message error header="There was some errors with your submission" list={errorMessages} />
-      ) : null}
+      {errorMessages.length > 0 ? <Message error header={FORM_ERROR_MESSAGE_HEADER_STR} list={errorMessages} /> : null}
     </Container>
   );
 };

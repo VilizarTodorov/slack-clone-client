@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import { HOME, REGISTER } from "../../constants/routes";
+import { HOME, LOGIN, REGISTER } from "../../constants/routes";
 
 const Home = React.lazy(() => import("../Home"));
 const Register = React.lazy(() => import("../Register"));
+const Login = React.lazy(() => import("../Login"));
 
 const Routes = () => {
   return (
@@ -14,6 +15,9 @@ const Routes = () => {
         </Route>
         <Route exact path={REGISTER}>
           <Register></Register>
+        </Route>
+        <Route exact path={LOGIN}>
+          <Login></Login>
         </Route>
       </Switch>
     </Suspense>
