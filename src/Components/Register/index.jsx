@@ -8,6 +8,7 @@ import {
   PASSWORD_STR,
   REGISTER_STR,
   REPEAT_PASSWORD_STR,
+  SUBMIT,
   USERNAME_STR,
 } from "../../constants/strings";
 import { registerMutation } from "../../Mutations";
@@ -118,7 +119,7 @@ const Register = () => {
           />
         </Form.Field>
 
-        <Button fluid>Submit</Button>
+        <Button fluid>{SUBMIT}</Button>
       </Form>
       {errorMessages.length > 0 ? <Message error header={FORM_ERROR_MESSAGE_HEADER_STR} list={errorMessages} /> : null}
     </Container>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Container, Form, Header, Button, Message } from "semantic-ui-react";
 import { HOME } from "../../constants/routes";
-import { EMAIL_STR, FORM_ERROR_MESSAGE_HEADER_STR, LOGIN_STR, PASSWORD_STR } from "../../constants/strings";
+import { EMAIL_STR, FORM_ERROR_MESSAGE_HEADER_STR, LOGIN_STR, PASSWORD_STR, SUBMIT } from "../../constants/strings";
 import { loginMutation } from "../../Mutations";
 
 // const INITIAL_ERROR_STATE = {
@@ -78,7 +78,7 @@ const Login = (props) => {
           />
         </Form.Field>
 
-        <Button fluid>Submit</Button>
+        <Button fluid>{SUBMIT}</Button>
       </Form>
 
       {errorMessages.length > 0 ? <Message error header={FORM_ERROR_MESSAGE_HEADER_STR} list={errorMessages} /> : null}
