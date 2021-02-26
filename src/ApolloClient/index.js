@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloLink, from, HttpLink, InMemoryCache } from "@apollo/client";
+import { useState } from "react";
 
 const httpLink = new HttpLink({ uri: "http://localhost:8080/graphql" });
 
@@ -14,6 +15,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const authAfterware = new ApolloLink((operation, forward) => {
+
   return forward(operation).map((response) => {
     const context = operation.getContext();
     const {
