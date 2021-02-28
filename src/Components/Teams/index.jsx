@@ -8,15 +8,20 @@ const TeamsWrapper = styled.div`
   color: #958993;
 `;
 
+const TeamList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+`;
+
 const Teams = ({ teams }) => {
   return (
     <TeamsWrapper>
-      <ul>
-        <li>Teams</li>
-        {teams.map((team) => (
-          <Team name={team}></Team>
+      <TeamList>
+        {teams.map((team, index) => (
+          <Team key={index} name={team}></Team>
         ))}
-      </ul>
+      </TeamList>
     </TeamsWrapper>
   );
 };

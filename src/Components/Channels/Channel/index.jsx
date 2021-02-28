@@ -1,7 +1,8 @@
 import React from "react";
+import SidebarListItem from "../../../StyledComponents/SidebarListItem";
 
 const Channel = ({ children }) => {
-  return <li>#{children}</li>;
+  return <SidebarListItem>#{children}</SidebarListItem>;
 };
 
 export default Channel;

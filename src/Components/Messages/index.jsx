@@ -10,8 +10,8 @@ const Messages = ({ messages }) => {
   return (
     <MessagesWrapper>
       <ul className="messages-list">
-        {messages.map((message) => (
-          <Message>{message}</Message>
+        {messages.map((message, index) => (
+          <Message key={index}>{message}</Message>
         ))}
       </ul>
     </MessagesWrapper>

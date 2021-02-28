@@ -10,29 +10,39 @@ const ChannelsWrapper = styled.div`
   color: #958993;
 `;
 
+const TeamNameHeader = styled.h1`
+  padding: 10px;
+  color: white;
+  font-size: 20px;
+`;
+
+const SidebarList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+`;
+
+const SidebarListHeader = styled.li`
+  padding-left: 5px;
+`;
+
 const Channels = ({ teamName, username, channels, users }) => {
   return (
     <ChannelsWrapper>
-      <div>
-        {teamName}
-        {username}
-      </div>
-      <div>
-        <ul>
-          <li>Channels</li>
-          {channels.map((channel, index) => (
-            <Channel key={index}>{channel}</Channel>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <ul>
-          <li>Direct Messages</li>
-          {users.map((user, index) => (
-            <User key={index}>{user}</User>
-          ))}
-        </ul>
-      </div>
+      <TeamNameHeader>{teamName}</TeamNameHeader>
+      {username}
+      <SidebarList>
+        <SidebarListHeader>Channels</SidebarListHeader>
+        {channels.map((channel, index) => (
+          <Channel key={index}>{channel}</Channel>
+        ))}
+      </SidebarList>
+      <SidebarList>
+        <SidebarListHeader>Direct Messages</SidebarListHeader>
+        {users.map((user, index) => (
+          <User key={index}>{user}</User>
+        ))}
+      </SidebarList>
     </ChannelsWrapper>
   );
 };
