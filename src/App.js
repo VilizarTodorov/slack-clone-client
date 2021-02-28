@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import Routes from "./Components/Routes";
+import Routes from "./Pages/Routes";
 import { Fragment } from "react";
 
 function App() {
