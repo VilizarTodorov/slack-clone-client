@@ -6,7 +6,7 @@ import SidebarListItem from "../../../StyledComponents/SidebarListItem";
 const Channel = ({ teamId, channelId, children }) => {
   return (
     <Link to={`${VIEW_TEAM_LINK_ROUTE}/${teamId}/${channelId}`}>
-      <SidebarListItem>#{children}{teamId}</SidebarListItem>
+      <SidebarListItem>#{children}</SidebarListItem>
     </Link>
   );
 };

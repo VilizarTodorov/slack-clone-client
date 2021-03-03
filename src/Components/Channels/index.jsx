@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
+import AddChannelModal from "../AddChannelModal";
 import Channel from "./Channel";
 import User from "./User";
 
@@ -33,13 +35,17 @@ const SidebarListHeader = styled.li`
 `;
 
 const Channels = ({ teamId, teamName, username, channels, users }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <ChannelsWrapper>
       <TeamNameHeader>{teamName}</TeamNameHeader>
       <UsernameHeader>{username}</UsernameHeader>
 
       <SidebarList>
-        <SidebarListHeader>Channels</SidebarListHeader>
+        <SidebarListHeader>
+          Channels <Icon onClick={() => setIsOpen(true)} name="add circle" />
+        </SidebarListHeader>
         {channels.map((channel) => (
           <Channel teamId={teamId} channelId={channel.id} key={channel.id}>
             {channel.name}
@@ -52,6 +58,7 @@ const Channels = ({ teamId, teamName, username, channels, users }) => {
           <User key={index}>{user}</User>
         ))}
       </SidebarList>
+      <AddChannelModal teamId={teamId} isOpen={isOpen} onClose={() => setIsOpen(false)}></AddChannelModal>
     </ChannelsWrapper>
   );
 };
