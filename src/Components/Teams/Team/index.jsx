@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { VIEW_TEAM, VIEW_TEAM_LINK_ROUTE } from "../../../constants/routes";
 
 const TeamListItem = styled.li`
   height: 50px;
@@ -18,9 +20,13 @@ const TeamListItem = styled.li`
   }
 `;
 
-const Team = ({ name }) => {
+const Team = ({ name, id }) => {
   const char = name.charAt(0).toUpperCase();
-  return <TeamListItem>{char}</TeamListItem>;
+  return (
+    <Link to={`${VIEW_TEAM_LINK_ROUTE}/${id}`}>
+      <TeamListItem>{char}</TeamListItem>
+    </Link>
+  );
 };
 
 export default Team;

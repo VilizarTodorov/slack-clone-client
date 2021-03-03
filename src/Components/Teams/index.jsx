@@ -18,8 +18,8 @@ const Teams = ({ teams }) => {
   return (
     <TeamsWrapper>
       <TeamList>
-        {teams.map((team, index) => (
-          <Team key={index} name={team}></Team>
+        {teams.map(({ id, name }) => (
+          <Team key={id} name={name} id={id}></Team>
         ))}
       </TeamList>
     </TeamsWrapper>

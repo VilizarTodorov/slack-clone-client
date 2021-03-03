@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Container, Form, Header, Message } from "semantic-ui-react";
 import { CREATE_TEAM_STR, SUBMIT, FORM_ERROR_MESSAGE_HEADER_STR, TEAM_NAME_STR } from "../../constants/strings";
 import { createTeamMutation } from "../../Mutations";
-import { LOGIN } from "../../constants/routes";
+import { LOGIN, VIEW_TEAM_LINK_ROUTE } from "../../constants/routes";
 import jwt_decode from "jwt-decode";
 import { withAuthorization } from "../../HOCs";
 
@@ -31,10 +31,10 @@ const CreateTeam = () => {
       return;
     }
 
-    const { ok, errors } = response.data.createTeam;
+    const { ok, errors, team } = response.data.createTeam;
 
     if (ok) {
-      console.log(ok);
+      history.push(`${VIEW_TEAM_LINK_ROUTE}/${team.id}`);
     } else {
       const err = { ...INITIAL_ERROR_STATE };
       const messagesList = [];

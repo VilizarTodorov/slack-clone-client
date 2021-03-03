@@ -16,6 +16,12 @@ const TeamNameHeader = styled.h1`
   font-size: 20px;
 `;
 
+const UsernameHeader = styled.h3`
+  padding-left: 10px;
+  color: white;
+  font-size: 16px;
+`;
+
 const SidebarList = styled.ul`
   list-style: none;
   padding-left: 0;
@@ -26,15 +32,18 @@ const SidebarListHeader = styled.li`
   padding-left: 5px;
 `;
 
-const Channels = ({ teamName, username, channels, users }) => {
+const Channels = ({ teamId, teamName, username, channels, users }) => {
   return (
     <ChannelsWrapper>
       <TeamNameHeader>{teamName}</TeamNameHeader>
-      {username}
+      <UsernameHeader>{username}</UsernameHeader>
+
       <SidebarList>
         <SidebarListHeader>Channels</SidebarListHeader>
-        {channels.map((channel, index) => (
-          <Channel key={index}>{channel}</Channel>
+        {channels.map((channel) => (
+          <Channel teamId={teamId} channelId={channel.id} key={channel.id}>
+            {channel.name}
+          </Channel>
         ))}
       </SidebarList>
       <SidebarList>
