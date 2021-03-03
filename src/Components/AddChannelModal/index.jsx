@@ -9,6 +9,7 @@ import {
   SUBMIT,
 } from "../../constants/strings";
 import { createChannelMutation } from "../../Mutations";
+import { allTeamsQuery } from "../../Queries";
 
 const INITIAL_ERROR_STATE = {
   nameError: "",
@@ -16,7 +17,7 @@ const INITIAL_ERROR_STATE = {
 
 const AddChannelModal = ({ isOpen, onClose, teamId }) => {
   const [name, setName] = useState("");
-  const [createChannel, { data }] = useMutation(createChannelMutation);
+  const [createChannel, { data }] = useMutation(createChannelMutation, { refetchQueries: [{ query: allTeamsQuery }] });
   const [errorMessages, setErrorMessages] = useState([]);
   const [inputErrors, setInputErrors] = useState({ ...INITIAL_ERROR_STATE });
 
