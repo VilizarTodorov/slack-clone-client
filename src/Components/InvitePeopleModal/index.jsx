@@ -1,23 +1,16 @@
-import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { Button, Form, Message, Modal } from "semantic-ui-react";
-import {
-  ADD_CHANNEL_STR,
-  CANCEL_STR,
-  CHANNEL_NAME_STR,
-  FORM_ERROR_MESSAGE_HEADER_STR,
-  SUBMIT,
-} from "../../constants/strings";
-import { createChannelMutation } from "../../Mutations";
-import { allTeamsQuery } from "../../Queries";
+import { useMutation } from "@apollo/client";
+import { ADD_MEMBER_STR, CANCEL_STR, EMAIL_STR, FORM_ERROR_MESSAGE_HEADER_STR, SUBMIT } from "../../constants/strings";
+import { addTeamMemberMutation } from "../../Mutations";
 
 const INITIAL_ERROR_STATE = {
-  nameError: "",
+  emailError: "",
 };
 
-const AddChannelModal = ({ isOpen, onClose, teamId }) => {
-  const [name, setName] = useState("");
-  const [createChannel, { data }] = useMutation(createChannelMutation, { refetchQueries: [{ query: allTeamsQuery }] });
+const InvitePeopleModal = ({ isOpen, onClose, teamId }) => {
+  const [addTeamMember, { date }] = useMutation(addTeamMemberMutation);
+  const [email, setEmail] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
   const [inputErrors, setInputErrors] = useState({ ...INITIAL_ERROR_STATE });
 
@@ -28,21 +21,20 @@ const AddChannelModal = ({ isOpen, onClose, teamId }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
+    
     let response = null;
 
     try {
-      response = await createChannel({ variables: { teamId, name } });
+      response = await addTeamMember({ variables: { teamId, email } });
     } catch (error) {
       console.log("there was an error");
       console.log(error);
     }
 
-    const { ok, errors, channel } = response.data.createChannel;
+    const { ok, errors } = response.data.addTeamMember;
 
     if (ok) {
-      console.log(channel);
-      // history.push(`${VIEW_TEAM_LINK_ROUTE}/${team.id}`);
+      console.log('member added');
       console.log(ok);
       console.log("success");
       onClose();
@@ -62,18 +54,18 @@ const AddChannelModal = ({ isOpen, onClose, teamId }) => {
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <Modal.Header>{ADD_CHANNEL_STR}</Modal.Header>
+      <Modal.Header>{ADD_MEMBER_STR}</Modal.Header>
       <Modal.Content>
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <Form.Input
               fluid
-              error={!!inputErrors.nameError}
-              label={CHANNEL_NAME_STR}
-              type="text"
-              value={name}
-              placeholder={CHANNEL_NAME_STR}
-              onChange={(event) => setName(event.target.value)}
+              error={!!inputErrors.emailError}
+              label={EMAIL_STR}
+              type="email"
+              value={email}
+              placeholder={EMAIL_STR}
+              onChange={(event) => setEmail(event.target.value)}
               required
             />
           </Form.Field>
@@ -92,4 +84,4 @@ const AddChannelModal = ({ isOpen, onClose, teamId }) => {
   );
 };
 
-export default AddChannelModal;
+export default InvitePeopleModal;

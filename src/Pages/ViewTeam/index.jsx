@@ -21,7 +21,8 @@ const ViewTeam = (props) => {
   }
 
   let username = "";
-  const team = params.teamId ? allTeams.data.allTeams.find((x) => x.id == params.teamId) : allTeams.data.allTeams[0];
+  const team = !!params.teamId ? allTeams.data.allTeams.find((x) => x.id == params.teamId) : allTeams.data.allTeams[0];
+  const channel = !!params.channelId ? team.channels.find((x) => x.id == params.channelId) : team.channels[0];
 
   try {
     const token = localStorage.getItem("token");
@@ -39,9 +40,9 @@ const ViewTeam = (props) => {
         channels={team.channels}
         users={["user 1", "user 2", "user 3"]}
       ></Channels>
-      <Header>general</Header>
+      <Header>{channel.name}</Header>
       <Messages messages={["message 1", "message 2", "message 3"]}></Messages>
-      <SendMessage channelName="general"></SendMessage>
+      <SendMessage channelName={channel.name}></SendMessage>
     </AppLayout>
   );
 };

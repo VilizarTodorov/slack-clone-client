@@ -11,3 +11,4 @@ export const FORM_ERROR_MESSAGE_HEADER_STR = "There was some errors with your su
 export const ADD_CHANNEL_STR = "Add Channel";
 export const CHANNEL_NAME_STR = "Channel Name";
 export const CANCEL_STR = "Cancel";
+export const ADD_MEMBER_STR = "Add Member";

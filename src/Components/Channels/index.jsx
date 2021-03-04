@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
+import SidebarListItem from "../../StyledComponents/SidebarListItem";
 import AddChannelModal from "../AddChannelModal";
+import InvitePeopleModal from "../InvitePeopleModal";
 import Channel from "./Channel";
 import User from "./User";
 
@@ -35,7 +37,8 @@ const SidebarListHeader = styled.li`
 `;
 
 const Channels = ({ teamId, teamName, username, channels, users }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAddChannel, setIsOpenAddChannel] = useState(false);
+  const [isOpenInvitePeople, setIsOpenInvitePeople] = useState(false);
 
   return (
     <ChannelsWrapper>
@@ -44,7 +47,7 @@ const Channels = ({ teamId, teamName, username, channels, users }) => {
 
       <SidebarList>
         <SidebarListHeader>
-          Channels <Icon onClick={() => setIsOpen(true)} name="add circle" />
+          Channels <Icon onClick={() => setIsOpenAddChannel(true)} name="add circle" />
         </SidebarListHeader>
         {channels.map((channel) => (
           <Channel teamId={teamId} channelId={channel.id} key={channel.id}>
@@ -57,8 +60,18 @@ const Channels = ({ teamId, teamName, username, channels, users }) => {
         {users.map((user, index) => (
           <User key={index}>{user}</User>
         ))}
+        <SidebarListItem onClick={() => setIsOpenInvitePeople(true)}>+ Invite People</SidebarListItem>
       </SidebarList>
-      <AddChannelModal teamId={teamId} isOpen={isOpen} onClose={() => setIsOpen(false)}></AddChannelModal>
+      <AddChannelModal
+        teamId={teamId}
+        isOpen={isOpenAddChannel}
+        onClose={() => setIsOpenAddChannel(false)}
+      ></AddChannelModal>
+      <InvitePeopleModal
+        teamId={teamId}
+        isOpen={isOpenInvitePeople}
+        onClose={() => setIsOpenInvitePeople(false)}
+      ></InvitePeopleModal>
     </ChannelsWrapper>
   );
 };
