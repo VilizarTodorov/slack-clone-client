@@ -78,10 +78,10 @@ const AddChannelModal = ({ isOpen, onClose, teamId }) => {
             />
           </Form.Field>
           <Form.Group widths="equal">
+            <Button fluid>{SUBMIT}</Button>
             <Button onClick={onCancel} fluid>
               {CANCEL_STR}
             </Button>
-            <Button fluid>{SUBMIT}</Button>
           </Form.Group>
         </Form>
         {errorMessages.length > 0 ? (

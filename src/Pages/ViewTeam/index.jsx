@@ -41,7 +41,7 @@ const ViewTeam = (props) => {
     const token = localStorage.getItem("token");
     const { user } = jwt_decode(token);
     username = user.username;
-    isOwner = user.id === team.id;
+    isOwner = user.id === team.owner;
   } catch (err) {}
 
   return (
@@ -56,8 +56,8 @@ const ViewTeam = (props) => {
         isOwner={isOwner}
       ></Channels>
       <Header>{channel.name}</Header>
-      <Messages messages={["message 1", "message 2", "message 3"]}></Messages>
-      <SendMessage channelName={channel.name}></SendMessage>
+      <Messages channelId={channel.id}></Messages>
+      <SendMessage channelName={channel.name} channelId={channel.id}></SendMessage>
     </AppLayout>
   );
 };
