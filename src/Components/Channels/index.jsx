@@ -36,7 +36,7 @@ const SidebarListHeader = styled.li`
   padding-left: 5px;
 `;
 
-const Channels = ({ teamId, teamName, username, channels, users }) => {
+const Channels = ({ teamId, teamName, username, channels, users, isOwner }) => {
   const [isOpenAddChannel, setIsOpenAddChannel] = useState(false);
   const [isOpenInvitePeople, setIsOpenInvitePeople] = useState(false);
 
@@ -47,7 +47,7 @@ const Channels = ({ teamId, teamName, username, channels, users }) => {
 
       <SidebarList>
         <SidebarListHeader>
-          Channels <Icon onClick={() => setIsOpenAddChannel(true)} name="add circle" />
+          Channels {isOwner && <Icon onClick={() => setIsOpenAddChannel(true)} name="add circle" />}
         </SidebarListHeader>
         {channels.map((channel) => (
           <Channel teamId={teamId} channelId={channel.id} key={channel.id}>
@@ -60,13 +60,15 @@ const Channels = ({ teamId, teamName, username, channels, users }) => {
         {users.map((user, index) => (
           <User key={index}>{user}</User>
         ))}
-        <SidebarListItem onClick={() => setIsOpenInvitePeople(true)}>+ Invite People</SidebarListItem>
+        {isOwner && <SidebarListItem onClick={() => setIsOpenInvitePeople(true)}>+ Invite People</SidebarListItem>}
       </SidebarList>
+
       <AddChannelModal
         teamId={teamId}
         isOpen={isOpenAddChannel}
         onClose={() => setIsOpenAddChannel(false)}
       ></AddChannelModal>
+
       <InvitePeopleModal
         teamId={teamId}
         isOpen={isOpenInvitePeople}

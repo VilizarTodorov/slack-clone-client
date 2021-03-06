@@ -34,7 +34,8 @@ const CreateTeam = () => {
     const { ok, errors, team } = response.data.createTeam;
 
     if (ok) {
-      history.push(`${VIEW_TEAM_LINK_ROUTE}/${team.id}`);
+      history.replace(`${VIEW_TEAM_LINK_ROUTE}/${team.id}`);
+      return;
     } else {
       const err = { ...INITIAL_ERROR_STATE };
       const messagesList = [];
